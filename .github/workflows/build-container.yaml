@@ -1,0 +1,25 @@
+name: build-and-deploy-container
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses:
+          actions/checkout@v2
+
+          # ----------------Deploy Images----------------
+      - name: Pull container and restart compose
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.USERNAME }}
+          script: |
+            sh /home/tim/deploy_gallery.sh
