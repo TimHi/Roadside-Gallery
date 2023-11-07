@@ -4,7 +4,7 @@ import RoadsideObject from '../components/RoadsideObject.vue';
 import type { RoadsideObjectModel } from '../model/RoadsideObjectModel'
 import { ref } from 'vue';
 
-const randomObjectUrl = 'https://0.0.0.0:9007/random-object'; // Replace with your API endpoint URL
+const randomObjectUrl = 'http://0.0.0.0:9007/random-object'; // Replace with your API endpoint URL
 const roadsideObject = ref<RoadsideObjectModel | undefined>(undefined)
 fetchRoadsideObject().then((r) => roadsideObject.value = r)
 
