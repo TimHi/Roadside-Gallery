@@ -33,7 +33,7 @@ async function fetchRoadsideObject() {
 
 <template>
   <div class="header">
-    <a href="/about">About</a>
+    <a href="/about"><h1>About</h1></a>
   </div>
   <div class="container">
     <RoadsideObject :model="roadsideObject" />
