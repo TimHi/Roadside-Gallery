@@ -4,7 +4,8 @@ import RoadsideObject from '../components/RoadsideObject.vue';
 import type { RoadsideObjectModel } from '../model/RoadsideObjectModel'
 import { ref } from 'vue';
 
-const randomObjectUrl = 'https://backend.roadside.beauty/random-object'; // Replace with your API endpoint URL
+const randomObjectUrl = 'https://backend.roadside.beauty/random-object'; //TODO_THL: .env
+const isLoading = ref<boolean>(true);
 const roadsideObject = ref<RoadsideObjectModel | undefined>(undefined)
 fetchRoadsideObject().then((r) => roadsideObject.value = r)
 
@@ -13,32 +14,37 @@ function getNewObject() {
 }
 
 async function fetchRoadsideObject() {
+  isLoading.value = true;
   try {
-    // Make the GET request to the API endpoint
     const response = await axios.get(randomObjectUrl);
-
-    // Check if the response status is 200 (OK)
     if (response.status === 200) {
-      // Parse the JSON response into a RoadsideObject
       const roadsideObject: RoadsideObjectModel = response.data;
+      isLoading.value = false;
       return roadsideObject;
     }
   } catch (error) {
+    roadsideObject.value = undefined;
     console.error('Error fetching data:', error);
   }
-
+  isLoading.value = false;
   return undefined;
 }
 </script>
 
 <template>
   <div class="header">
-    <a href="/about"><h1>About</h1></a>
+    <a href="/about">
+      <h4>About</h4>
+    </a>
   </div>
   <div class="container">
-    <RoadsideObject :model="roadsideObject" />
-    <button @click="getNewObject" class="button-31" role="button">Next</button>
-
+    <div v-if="isLoading">
+      <h1>Loading... 👀</h1>
+    </div>
+    <div v-else>
+      <RoadsideObject :model="roadsideObject" />
+      <button @click="getNewObject" class="button-31" role="button">Next</button>
+    </div>
   </div>
 </template>
 

@@ -24,8 +24,7 @@ const props = defineProps<Props>()
 <style>
 .image-container {
     margin-top: 12px;
-    max-height: 700px;
-    /* Set your desired fixed height here */
+    max-height: 70vh;
     width: auto;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 8px 15px;
