@@ -16,7 +16,9 @@ func main() {
 	}
 	api.LoadData()
 	e := echo.New()
-	e.Use(middleware.CORS())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+	}))
 	e.GET("/random-object", api.GetRandomRoadsideObject)
 	e.Logger.Fatal(e.Start(":9007"))
 }
