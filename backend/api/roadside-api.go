@@ -1,13 +1,13 @@
 package api
 
 import (
-	"log"
 	"math/rand"
 	"net/http"
 	"regexp"
 	"strconv"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/gommon/log"
 	"github.com/timhi/gallery-backend/m/v2/data"
 	"github.com/timhi/gallery-backend/m/v2/model"
 )
@@ -28,17 +28,17 @@ func parseInt(s string) int64 {
 
 	regex, err := regexp.Compile(pattern)
 	if err != nil {
-		log.Fatalf("Error compiling regex: %s\n", err)
+		log.Errorf("Error compiling regex: %s\n", err)
 	}
 
 	matches := regex.FindAllString(s, -1)
 	if len(matches) == 0 {
-		log.Fatal("No Year")
+		log.Error("No Year")
 	}
 
 	r, err := strconv.ParseInt(matches[0], 10, 64)
 	if err != nil {
-		log.Fatal(err)
+		log.Error(err)
 	}
 	return r
 }
@@ -46,6 +46,10 @@ func parseInt(s string) int64 {
 func GetRandomRoadsideObject(c echo.Context) error {
 	index := rand.Intn(len(roadsideData))
 	object := roadsideData[index]
-	object.Image_data = data.GetImageData(object.Image)
+	img, err := data.GetImageData(object.Image)
+	if err != nil {
+		return err
+	}
+	object.Image_data = img
 	return c.JSON(http.StatusOK, object)
 }

@@ -3,9 +3,10 @@ package data
 import (
 	"encoding/base64"
 	"encoding/csv"
-	"log"
 
 	"os"
+
+	"github.com/labstack/gommon/log"
 )
 
 func ReadCsvFile(filePath string) [][]string {
@@ -24,14 +25,15 @@ func ReadCsvFile(filePath string) [][]string {
 	return records
 }
 
-func GetImageData(file string) string {
+func GetImageData(file string) (string, error) {
 	assetsPath := os.Getenv("ASSETS")
 	imageFile, err := os.ReadFile(assetsPath + file)
 	if err != nil {
-		log.Fatal("Error reading the image file:", err)
+		log.Error("Error reading the image file:", err)
+		return "", err
 	}
 
 	// Encode the image data as base64
 	base64Image := base64.StdEncoding.EncodeToString(imageFile)
-	return base64Image
+	return base64Image, nil
 }
