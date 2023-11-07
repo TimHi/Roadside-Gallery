@@ -6,7 +6,7 @@ COPY . .
 
 RUN go build -o main .
 
-EXPOSE 9001
+EXPOSE 9007
 
 # Run
-CMD ["./main", "serve",  "--http=0.0.0.0:9001"]
+CMD ["./main"]

@@ -25,8 +25,8 @@ func ReadCsvFile(filePath string) [][]string {
 }
 
 func GetImageData(file string) string {
-	// TODO_THL: env file
-	imageFile, err := os.ReadFile("/Users/hiller/dev/gallery/backend/assets/us_roadside_attractions_images/us_roadside_attractions_images/" + file)
+	assetsPath := os.Getenv("ASSETS")
+	imageFile, err := os.ReadFile(assetsPath + file)
 	if err != nil {
 		log.Fatal("Error reading the image file:", err)
 	}
