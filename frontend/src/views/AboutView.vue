@@ -17,7 +17,7 @@
             <p>Images are done by <a href="https://en.wikipedia.org/wiki/John_Margolies">John Margolies</a>.</p>
         </div>
         <div>
-            <img src="statue.jpg" class="image-container" />
+            <img src="/statue.jpg" class="image-container" />
             <p><i>My fav, the man himself.</i></p>
             <p>Code can be found at <a href="https://github.com/TimHi/Roadside-Gallery">GitHub</a>.</p>
         </div>
