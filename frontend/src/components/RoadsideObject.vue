@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RoadsideObjectModel } from '../model/RoadsideObjectModel';
+import type { RoadsideObjectModel } from '../model/RoadsideObjectModel';
 
 interface Props {
     model: RoadsideObjectModel | undefined
