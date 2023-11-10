@@ -21,5 +21,6 @@ func main() {
 		AllowOrigins: []string{"*"},
 	}))
 	e.GET("/random-object", api.GetRandomRoadsideObject)
+	e.GET("/object/:id", api.GetRoadsideObjectById)
 	e.Logger.Fatal(e.Start(":8090"))
 }

@@ -53,3 +53,20 @@ func GetRandomRoadsideObject(c echo.Context) error {
 	object.Image_data = img
 	return c.JSON(http.StatusOK, object)
 }
+
+func GetRoadsideObjectById(c echo.Context) error {
+	id := c.Param("id")
+	index, err := strconv.Atoi(id)
+	if err != nil {
+		return err
+	}
+
+	object := roadsideData[index]
+	img, err := data.GetImageData(object.Image)
+	if err != nil {
+		return err
+	}
+
+	object.Image_data = img
+	return c.JSON(http.StatusOK, object)
+}
