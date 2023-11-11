@@ -1,34 +1,13 @@
 <script setup lang="ts">
-import axios from 'axios';
-import RoadsideObject from '../components/RoadsideObject.vue';
-import type { RoadsideObjectModel } from '../model/RoadsideObjectModel'
-import { ref } from 'vue';
-
-const randomObjectUrl = 'https://backend.roadside.beauty/random-object'; //TODO_THL: .env
-const isLoading = ref<boolean>(true);
-const roadsideObject = ref<RoadsideObjectModel | undefined>(undefined)
-fetchRoadsideObject().then((r) => roadsideObject.value = r)
+import { useRouter } from 'vue-router';
+import { getRandomInt } from '../util/random'
+const router = useRouter();
 
 function getNewObject() {
-  fetchRoadsideObject().then((r) => roadsideObject.value = r)
+  const id = getRandomInt(11711);
+  router.push('/o/'+id);
 }
 
-async function fetchRoadsideObject() {
-  isLoading.value = true;
-  try {
-    const response = await axios.get(randomObjectUrl);
-    if (response.status === 200) {
-      const roadsideObject: RoadsideObjectModel = response.data;
-      isLoading.value = false;
-      return roadsideObject;
-    }
-  } catch (error) {
-    roadsideObject.value = undefined;
-    console.error('Error fetching data:', error);
-  }
-  isLoading.value = false;
-  return undefined;
-}
 </script>
 
 <template>
@@ -38,12 +17,11 @@ async function fetchRoadsideObject() {
     </a>
   </div>
   <div class="container">
-    <div v-if="isLoading">
-      <h1>Loading... 👀</h1>
-    </div>
-    <div v-else>
-      <RoadsideObject :model="roadsideObject" />
-      <button @click="getNewObject" class="button-31" role="button">Next</button>
+    <div>
+      <h1>Explore over 10.000 obscure roadside attractions</h1>
+      <img src="/statue.jpg" class="image-container" />
+            <p><i>My fav, the man himself.</i></p>
+      <button @click="getNewObject" class="button-31" role="button">Start</button>
     </div>
   </div>
 </template>
