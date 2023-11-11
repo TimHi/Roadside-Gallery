@@ -7,7 +7,7 @@ import { useRoute } from 'vue-router';
 import { getRandomInt } from '../util/random'
 import router from '../router';
 
-const randomObjectUrl = 'http://localhost:8090/object/'; //TODO_THL: .env
+const randomObjectUrl = 'https://backend.roadside.beauty/object/'; //TODO_THL: .env
 const isLoading = ref<boolean>(true);
 const roadsideObject = ref<RoadsideObjectModel | undefined>(undefined);
 const route = useRoute();
